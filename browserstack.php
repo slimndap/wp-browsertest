@@ -19,17 +19,22 @@ class Browserstack {
 
 		add_action( 'admin_bar_menu', array($this,'admin_bar_menu'), 999 );
 		
-		
 		add_action('plugins_loaded', function(){
 			load_plugin_textdomain('browserstack', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 		});
+
+		add_action( 'wp_enqueue_scripts', function() {
+			wp_enqueue_style( 'browserstack_css', plugins_url( 'style.css', __FILE__ ) );
+		});
+
+
 
 	}
 
 	function admin_bar_menu( $wp_admin_bar ) {
 		$args = array(
 			'id'    => 'browserstack',
-			'title' => '<img src="http://assets.codepen.io/images/browserstack.png" /> Browserstack',
+			'title' => '<span class="ab-label">Browserstack</span>',
 			'href'  => false,
 			'meta'  => array( 'class' => 'my-toolbar-page' )
 		);
@@ -50,7 +55,7 @@ class Browserstack {
 				$args = array(
 					'id'    => 'browserstack_os_'.$i.'_'.$j,
 					'title' => $val,
-					'href'  => 'http://www.browserstack.com/start#'.$key.'&speed=1&start=true&url='.$this->current_url,
+					'href'  => 'http://www.browserstack.com/start#'.$key.'&url='.$this->current_url.'&zoom_to_fit=true&resolution=undefined&speed=1&start=true',
 					'meta'  => array( 'class' => 'my-toolbar-page' ),
 					'parent' => 'browserstack_os_'.$i
 				);
