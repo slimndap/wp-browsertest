@@ -9,6 +9,15 @@ Author URI: http://slimndap.com/
 Text Domain: browserstack
 */
 
+add_action( 'wp_ajax_browserstack_set', function() {
+	$options = array(
+		'title' => $_POST['title'],
+		'url' => $_POST['url']
+	);
+	update_option('browserstack', $options);
+	die;
+});
+
 class Browserstack {
 
 	function __construct() {
@@ -25,19 +34,29 @@ class Browserstack {
 
 		add_action( 'wp_enqueue_scripts', function() {
 			wp_enqueue_style( 'browserstack_css', plugins_url( 'style.css', __FILE__ ) );
+			wp_enqueue_script( 'browserstack_js', plugins_url( 'main.js', __FILE__ ), array('jquery') );
+			wp_localize_script( 'browserstack_js', 'ajax_object',
+            	array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
 		});
-
-
 
 	}
 
 	function admin_bar_menu( $wp_admin_bar ) {
-		$args = array(
-			'id'    => 'browserstack',
-			'title' => '<span class="ab-label">BrowserStack</span>',
-			'href'  => false,
-			'meta'  => array( 'class' => 'my-toolbar-page' )
-		);
+		if (isset($this->options['title']) && isset($this->options['url'])) {
+			$args = array(
+				'title' => '<span class="ab-label">'.$this->options['title'].'</span>',
+				'href'  => $this->options['url'],
+				'meta'  => array( 'class' => 'browserstack-set' )
+			);
+			
+		} else {
+			$args = array(
+				'title' => '<span class="ab-label">BrowserStack</span>',
+				'href'  => '#',
+				'meta'  => array( 'class' => '' )
+			);			
+		}
+		$args['id'] = 'browserstack';
 		$wp_admin_bar->add_node( $args );
 
 		$i = 0;		
@@ -46,17 +65,17 @@ class Browserstack {
 				'id'    => 'browserstack_os_'.$i,
 				'title' => $os,
 				'href'  => false,
-				'meta'  => array( 'class' => 'my-toolbar-page' ),
+				'meta'  => array( 'class' => 'browserstack_os' ),
 				'parent' => 'browserstack'
 			);
 			$wp_admin_bar->add_node( $args );
 			$j=0;
 			foreach ($browsers as $key => $val) {
 				$args = array(
-					'id'    => 'browserstack_os_'.$i.'_'.$j,
+					'id'    => 'browserstack_os_'.$i.'_browser_'.$j,
 					'title' => $val,
 					'href'  => 'http://www.browserstack.com/start#'.$key.'&url='.$this->current_url.'&zoom_to_fit=true&resolution=undefined&speed=1&start=true',
-					'meta'  => array( 'class' => 'my-toolbar-page' ),
+					'meta'  => array( 'class' => 'browserstack_browser' ),
 					'parent' => 'browserstack_os_'.$i
 				);
 				$wp_admin_bar->add_node( $args );
@@ -125,7 +144,7 @@ class Browserstack {
 }
 
 add_action('plugins_loaded', function(){
-	if( !is_admin() && current_user_can('edit_themes'))
+	if(current_user_can('edit_themes') && !is_admin())
 		new Browserstack();
 });
 ?>

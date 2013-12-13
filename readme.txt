@@ -19,8 +19,7 @@ This plugin borrows heavily from the BrowserStack integration on Codepen.io.
 
 __What's next?__
 
-* Remember your previous OS/browser choice.
-* Support for web tunnels.
+* Local testing with web tunnels.
 
 == Installation ==
 
