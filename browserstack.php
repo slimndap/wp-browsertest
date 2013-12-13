@@ -34,7 +34,7 @@ class Browserstack {
 	function admin_bar_menu( $wp_admin_bar ) {
 		$args = array(
 			'id'    => 'browserstack',
-			'title' => '<span class="ab-label">Browserstack</span>',
+			'title' => '<span class="ab-label">BrowserStack</span>',
 			'href'  => false,
 			'meta'  => array( 'class' => 'my-toolbar-page' )
 		);
@@ -124,6 +124,8 @@ class Browserstack {
 	}
 }
 
-if( !is_admin() )
-	$browserstack = new Browserstack();
+add_action('plugins_loaded', function(){
+	if( !is_admin() && current_user_can('edit_themes'))
+		new Browserstack();
+});
 ?>
