@@ -1,4 +1,4 @@
-=== BrowserStack ===
+=== Browsertest ===
 Contributors: slimndap
 Tags: browser, testing
 Requires at least: 3.3
@@ -7,11 +7,11 @@ Stable tag: trunk
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-The BrowserStack plugin allows you to open the current page in BrowserStack directly from the admin bar.
+The Browsertest plugin allows you to open the current page in BrowserStack directly from the admin bar.
 
 == Description ==
 
-The BrowserStack plugin allows you to open the current page in BrowserStack directly from the admin bar. No setup required.
+The Browsertest plugin allows you to open the current page in BrowserStack directly from the admin bar. No setup required.
 
 BrowserStack gives you live, web-based browser testing with instant access to all desktop and mobile browsers.
 
@@ -30,7 +30,7 @@ This section describes how to install the plugin and get it working.
 
 __Contributors Welcome__
 
-* Submit a [pull request on Github](https://github.com/slimndap/wp-browserstack)
+* Submit a [pull request on Github](https://github.com/slimndap/wp-browsertest)
 
 __Author__
 

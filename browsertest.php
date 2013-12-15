@@ -1,41 +1,41 @@
 <?php
 /*
-Plugin Name: Browserstack
-Plugin URI: http://wordpress.org/plugins/browserstack/
+Plugin Name: Browsertest
+Plugin URI: http://wordpress.org/plugins/browsertest/
 Description: Open the current page in BrowserStack.
 Author: Jeroen Schmit, Slim & Dapper
 Version: 0.1
 Author URI: http://slimndap.com/
-Text Domain: browserstack
+Text Domain: browsertest
 */
 
-add_action( 'wp_ajax_browserstack_set', function() {
+add_action( 'wp_ajax_browsertest_set', function() {
 	$options = array(
 		'title' => $_POST['title'],
 		'url' => $_POST['url']
 	);
-	update_option('browserstack', $options);
+	update_option('browsertest', $options);
 	die;
 });
 
-class Browserstack {
+class Browsertest {
 
 	function __construct() {
 
 		$this->current_url = $this->get_current_url();
-		$this->options = get_option('browserstack');
+		$this->options = get_option('browsertest');
 		$this->stack = $this->get_stack();
 
 		add_action( 'admin_bar_menu', array($this,'admin_bar_menu'), 999 );
 		
 		add_action('plugins_loaded', function(){
-			load_plugin_textdomain('browserstack', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+			load_plugin_textdomain('browsertest', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 		});
 
 		add_action( 'wp_enqueue_scripts', function() {
-			wp_enqueue_style( 'browserstack_css', plugins_url( 'style.css', __FILE__ ) );
-			wp_enqueue_script( 'browserstack_js', plugins_url( 'main.js', __FILE__ ), array('jquery') );
-			wp_localize_script( 'browserstack_js', 'ajax_object',
+			wp_enqueue_style( 'browsertest_css', plugins_url( 'style.css', __FILE__ ) );
+			wp_enqueue_script( 'browsertest_js', plugins_url( 'main.js', __FILE__ ), array('jquery') );
+			wp_localize_script( 'browsertest_js', 'ajax_object',
             	array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
 		});
 
@@ -46,37 +46,37 @@ class Browserstack {
 			$args = array(
 				'title' => '<span class="ab-label">'.$this->options['title'].'</span>',
 				'href'  => $this->options['url'],
-				'meta'  => array( 'class' => 'browserstack-set' )
+				'meta'  => array( 'class' => 'browsertest-set' )
 			);
 			
 		} else {
 			$args = array(
-				'title' => '<span class="ab-label">BrowserStack</span>',
+				'title' => '<span class="ab-label">Browsertest</span>',
 				'href'  => '#',
 				'meta'  => array( 'class' => '' )
 			);			
 		}
-		$args['id'] = 'browserstack';
+		$args['id'] = 'browsertest';
 		$wp_admin_bar->add_node( $args );
 
 		$i = 0;		
 		foreach ($this->stack as $os=>$browsers) {
 			$args = array(
-				'id'    => 'browserstack_os_'.$i,
+				'id'    => 'browsertest_os_'.$i,
 				'title' => $os,
 				'href'  => false,
-				'meta'  => array( 'class' => 'browserstack_os' ),
-				'parent' => 'browserstack'
+				'meta'  => array( 'class' => 'browsertest_os' ),
+				'parent' => 'browsertest'
 			);
 			$wp_admin_bar->add_node( $args );
 			$j=0;
 			foreach ($browsers as $key => $val) {
 				$args = array(
-					'id'    => 'browserstack_os_'.$i.'_browser_'.$j,
+					'id'    => 'browsertest_os_'.$i.'_browser_'.$j,
 					'title' => $val,
 					'href'  => 'http://www.browserstack.com/start#'.$key.'&url='.$this->current_url.'&zoom_to_fit=true&resolution=undefined&speed=1&start=true',
-					'meta'  => array( 'class' => 'browserstack_browser' ),
-					'parent' => 'browserstack_os_'.$i
+					'meta'  => array( 'class' => 'browsertest_browser' ),
+					'parent' => 'browsertest_os_'.$i
 				);
 				$wp_admin_bar->add_node( $args );
 					
@@ -145,6 +145,6 @@ class Browserstack {
 
 add_action('plugins_loaded', function(){
 	if(current_user_can('edit_themes') && !is_admin())
-		new Browserstack();
+		new Browsertest();
 });
 ?>
