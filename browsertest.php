@@ -51,7 +51,7 @@ class Browsertest {
 			
 		} else {
 			$args = array(
-				'title' => '<span class="ab-label">Browsertest</span>',
+				'title' => '<span class="ab-label">BrowserStack</span>',
 				'href'  => '#',
 				'meta'  => array( 'class' => '' )
 			);			
