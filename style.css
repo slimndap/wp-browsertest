@@ -1,7 +1,7 @@
-#wpadminbar > #wp-toolbar #wp-admin-bar-root-default #wp-admin-bar-browserstack > .ab-item .ab-icon {
+#wpadminbar > #wp-toolbar #wp-admin-bar-root-default #wp-admin-bar-browsertest > .ab-item .ab-icon {
   display: none;
 }
-#wpadminbar > #wp-toolbar #wp-admin-bar-root-default #wp-admin-bar-browserstack > .ab-item .ab-label {
+#wpadminbar > #wp-toolbar #wp-admin-bar-root-default #wp-admin-bar-browsertest > .ab-item .ab-label {
   background-image: url(assets/browserstack@1x.png) !important;
   background-repeat: no-repeat;
   background-position: left center;
@@ -9,7 +9,7 @@
   padding-left: 20px;
 }
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  #wpadminbar > #wp-toolbar #wp-admin-bar-root-default #wp-admin-bar-browserstack > .ab-item .ab-label {
+  #wpadminbar > #wp-toolbar #wp-admin-bar-root-default #wp-admin-bar-browsertest > .ab-item .ab-label {
     background-image: url(assets/browserstack@2x.png);
   }
 }
