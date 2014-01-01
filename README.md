@@ -1,4 +1,4 @@
 wp-browserstack
 ===============
 
-BrowserStack plugin for Wordpres. Opens the current page in BrowserStack.
+BrowserStack plugin for Wordpress. Opens the current page in BrowserStack.
