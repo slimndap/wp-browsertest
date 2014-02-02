@@ -34,8 +34,15 @@ This section describes how to install the plugin and get it working.
 1. Add the `browserstack` directory to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 
+== Frequently Asked Questions ==
+ 
+= I installed the plugin but I don't see it =
+The BrowserStack button is visible at the top of every page of your website. It is hidden in the admin section though, since it doesn't make any sense to open up your admin pages in BrowserStack.
 
 == Changelog ==
+
+= 0.2 =
+* Remember last chosen browser/OS.
 
 = 0.1 =
 * Basic version of the plugin.

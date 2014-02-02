@@ -4,7 +4,7 @@ Plugin Name: Browsertest
 Plugin URI: http://wordpress.org/plugins/browsertest/
 Description: Open the current page in BrowserStack.
 Author: Jeroen Schmit, Slim & Dapper
-Version: 0.1
+Version: 0.2
 Author URI: http://slimndap.com/
 Text Domain: browsertest
 */
